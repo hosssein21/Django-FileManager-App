@@ -2,7 +2,8 @@ from django.contrib.auth import views as auth_views
 from django.views.generic import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from .forms import LoginForm
+from .forms import LoginForm,SignupForm
+from django.urls import reverse_lazy
 
 class LoginView(SuccessMessageMixin,auth_views.LoginView):
     template_name='account/login.html'
@@ -20,5 +21,8 @@ class LogoutView(auth_views.LogoutView):
         messages.success(request, "شما با موفقیت خارج شدید.")
         return super().dispatch(request, *args, **kwargs)
 
-class SignupView(CreateView):
-    pass
+class SignupView(SuccessMessageMixin,CreateView):
+    template_name = 'account/signup.html'
+    form_class = SignupForm
+    success_url=reverse_lazy('account:login')
+    success_message='با موفقیت حساب کاربری شما ایجاد شد'
