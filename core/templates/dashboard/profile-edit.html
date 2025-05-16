@@ -1,0 +1,21 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+
+{% block title %} ویرایش پروفایل{% endblock title %}
+
+{% block content %}
+
+<div class="col-12 col-md-8 mx-auto">
+    <div class="card shadow my-4">
+        <div class="card-body">
+            <h2 class="h4 mb-3">ویرایش پروفایل</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary mt-3">ذخیره تغییرات</button>
+                <a href="{% url 'dashboard:home' %}" class="btn btn-secondary mt-3">لغو</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

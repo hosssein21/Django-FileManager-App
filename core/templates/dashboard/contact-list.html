@@ -1,0 +1,98 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+{% load blog_tags %}
+
+{% block title %} لیست مخاطبان {% endblock title %}
+
+{% block content %}
+
+
+<div class="col-12">
+    <div class="row">
+      <!-- Small table -->
+      <div class="col-md-12 my-4">
+        <h2 class="h4 mb-1">لیست پیام های ارسال شده</h2>
+        <p class="mb-3">کاربرانی که برای شما پیام فرستاده اند را دراین صفحه مشاهده میکنید</p>
+        <div class="card shadow">
+          <div class="card-body">
+            <div class="toolbar">
+              <form class="form mb-3" action='.' >
+                <div class="form-row">
+                  <div class="form-group col-auto">
+                    <label for="search" class="sr-only">جست و جو</label>
+                    <input  name='q' type="text" class="form-control" id="search1" value="" placeholder="جست وجو">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <!-- table -->
+            <table class="table table-borderless table-hover">
+              <thead>
+                <tr>
+                  <th>نام</th>
+                  <th>شماره تماس</th>
+                  <th class="w-25">پیام</th>
+                  <th>تاریخ</th>
+                  <th>عملیات</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for contact in contacts %}
+                <tr>
+                  <td>
+                    <p class="mb-0 "><strong>{{contact.name}}</strong></p>
+                  </td>
+                  <td>
+                    <p class="mb-0 ">{{contact.phone_number}}</p>
+                  </td>
+                  <td class="w-25">{{contact.message|truncatewords:10}}</td>
+                  <td >{{contact.created_time|jalali_date}}</td>
+                  <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class=" sr-only">Action</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <a class="dropdown-item" href="{% url 'dashboard:contact_delete' pk=contact.id %}">حذف</a>
+                      <a class="dropdown-item" href="{% url 'dashboard:contact_detail' pk=contact.id %}">مشاهده</a>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <nav aria-label="Table Paging" class="mb-0 mt-5">
+              <ul class="pagination justify-content-center mb-0">
+                  {% if page_obj.has_previous %}
+                      <li class="page-item">
+                          <a class="page-link" href="?page=1">صفحه نخست</a>
+                      </li>
+                      <li class="page-item">
+                          <a class="page-link" href="?page={{ page_obj.previous_page_number }}">قبل</a>
+                      </li>
+                  {% endif %}
+          
+                  {% for num in page_obj.paginator.page_range %}
+                      {% if num == page_obj.number %}
+                          <li class="page-item active" aria-current="page">
+                              <a class="page-link" href="#">{{ num }}</a>
+                          </li>
+                      {% else %}
+                          <li class="page-item">
+                              <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                          </li>
+                      {% endif %}
+                  {% endfor %}
+          
+                  {% if page_obj.has_next %}
+                      <li class="page-item">
+                          <a class="page-link" href="?page={{ page_obj.next_page_number }}">بعد</a>
+                      </li>
+                      <li class="page-item">
+                          <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">صفحه آخر</a>
+                      </li>
+                  {% endif %}
+              </ul>
+          </nav>
+          </div>
+        </div>
+      </div> <!-- customized table -->
+{% endblock content %}

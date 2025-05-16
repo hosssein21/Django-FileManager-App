@@ -1,0 +1,63 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+
+{% block title %} داشبورد{% endblock title%}
+
+{% block content %}
+<div class="col-12">
+  <div class="w-50 mx-auto text-center justify-content-center py-5 my-5">
+    <h2 class="page-title mb-0">به پنل مدیرتی ادمین سایت خوش آمدید</h2>
+    <p class="lead  mb-4 mt-2">با این سیستم به راحتی میتوانید داده ها و فایل های خود را مدیریت کنید</p>
+  </div>
+  <div class="row my-4">
+    <div class="col-6 col-lg-3">
+      <div class="card shadow mb-4">
+        <div class="card-body">
+          <i class="fe fe-info fe-32 text-primary"></i>
+          <a href="#">
+            <h3 class="h5 mt-4 mb-1">پروفایل</h3>
+          </a>
+          <p class="">تنطیمات شخصی پروفایل</p>
+        </div> <!-- .card-body -->
+      </div> <!-- .card -->
+    </div> <!-- .col-md-->
+    <div class="col-6 col-lg-3">
+      <div class="card shadow mb-4">
+        <div class="card-body">
+          <i class="fe fe-book fe-32 text-success"></i>
+          <a href="{% url 'dashboard:post_list' %}">
+            <h3 class="h5 mt-4 mb-1">مقالات</h3>
+          </a>
+          <p class="">دسترسی به پست ها ومقالات</p>
+        </div> <!-- .card-body -->
+      </div> <!-- .card -->
+    </div> <!-- .col-md-->
+    <div class="col-6 col-lg-3">
+      <div class="card shadow mb-4">
+        <div class="card-body">
+          <i class="fe fe-image fe-32 text-warning"></i>
+          <a href="{% url 'dashboard:gallery_list' %}">
+            <h3 class="h5 mt-4 mb-1">گالری</h3>
+          </a>
+          <p class="">دسترسی به تصاویر گالری</p>
+        </div> <!-- .card-body -->
+      </div> <!-- .card -->
+    </div> <!-- .col-md-->
+    <div class="col-6 col-lg-3">
+      <div class="card shadow">
+        <div class="card-body">
+          <i class="fe fe-book fe-32 text-danger"></i>
+          <a href="{% url 'dashboard:contact_list' %}">
+            <h3 class="h5 mt-4 mb-1">پیام ها</h3>
+          </a>
+          <p class="">دسترسی به لیست پیام های ارسال شده</p>
+        </div> <!-- .card-body -->
+      </div> <!-- .card -->
+    </div> <!-- .col-md-->
+  </div> <!-- .row -->
+
+</div> <!-- .col-12 -->
+</div> <!-- .row -->
+</div> <!-- .container-fluid -->
+
+{% endblock content %}
