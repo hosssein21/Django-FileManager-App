@@ -1,0 +1,57 @@
+{% if messages %}
+  {% for message in messages %}
+    <script>
+      // Define a color mapping based on message tags
+      const messageColors = {
+        success: "green",
+        error: "red",
+        info: "blue",
+        warning: "orange"
+      };
+
+      // Determine the background color from the message tag
+      const bgColor = messageColors['{{ message.tags }}'] || "gray"; // Default to gray if tag not found
+
+      Toastify({
+        text: `{{ message|safe }}`,
+        className: `{{ message.tags }}`,
+        style: {
+          background: bgColor,
+        }
+      }).showToast();
+    </script>
+  {% endfor %}
+{% endif %}
+
+{% if form.errors %}
+  <div class="alert alert-error">
+    <ul>
+      {% for field in form %}
+        {% if field.errors %}
+          {% for error in field.errors %}
+            <script>
+              Toastify({
+                text: `{{ error|escapejs }}`,  // Use escapejs for better escaping in JavaScript
+                className: `error`,
+                style: {
+                  background: "red",
+                }
+              }).showToast();
+            </script>
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </ul>
+    {% if form.non_field_errors %}
+      <script>
+        Toastify({
+          text: `{{ form.non_field_errors.as_text|escapejs }}`,
+          className: `error`,
+          style: {
+            background: "red",
+          }
+        }).showToast();
+      </script>
+    {% endif %}
+  </div>
+{% endif %}
