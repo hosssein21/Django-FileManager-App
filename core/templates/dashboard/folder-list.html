@@ -1,0 +1,38 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+
+{% block title %}لیست پوشه‌ها{% endblock title %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="text-center mb-4">
+    <h2 class="page-title">مدیریت پوشه‌ها</h2>
+    <p class="lead">در این بخش می‌توانید پوشه‌های خود را مشاهده و مدیریت کنید</p>
+  </div>
+
+  <div class="row">
+    {% for folder in folders %}
+      <div class="card-body position-relative">
+        <i class="fe fe-folder fe-32 text-warning"></i>
+        <h5 class="card-title mt-2">
+            <a href="{% url 'dashboard:folder-detail' folder.pk %}">{{ folder.name }}</a>
+        </h5>
+        <p class="text-muted small">تاریخ ساخت: {{ folder.created_at|date:"Y/m/d" }}</p>
+
+        <div class="position-absolute top-0 end-0 m-2">
+            <a href="{% url 'dashboard:folder-edit' folder.pk %}" class="text-primary me-2" title="ویرایش">
+            <i class="fe fe-edit"></i>
+            </a>
+            <a href="{% url 'dashboard:folder-delete' folder.pk %}" class="text-danger" title="حذف" onclick="return confirm('آیا مطمئن هستید؟');">
+            <i class="fe fe-trash-2"></i>
+            </a>
+        </div>
+        </div>
+    {% empty %}
+      <div class="alert alert-info w-100 text-center">
+        هیچ پوشه‌ای یافت نشد.
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

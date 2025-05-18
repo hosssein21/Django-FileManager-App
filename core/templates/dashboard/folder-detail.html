@@ -1,0 +1,72 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+{% load extras %}
+
+{% block title %}جزئیات پوشه{% endblock title %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="mb-4 text-center">
+    <h2 class="page-title">پوشه: {{ folder.name }}</h2>
+    <p class="lead">فایل‌ها و زیرپوشه‌های موجود در "{{ folder.name }}"</p>
+    {% if folder.parent %}
+      <a href="{% url 'dashboard:folder-detail' folder.parent.pk %}" class="btn btn-sm btn-outline-secondary">بازگشت</a>
+    {% else %}
+      <a href="{% url 'dashboard:folder-list' %}" class="btn btn-sm btn-outline-secondary">بازگشت به لیست پوشه‌ها</a>
+    {% endif %}
+  </div>
+
+  <div class="row">
+    {% for subfolder in folder.subfolders.all %}
+      <div class="col-6 col-md-3 mb-4">
+        <div class="card text-center shadow-sm">
+          <div class="card-body">
+             <div class="position-absolute top-0 end-0 m-2">
+            <a href="{% url 'dashboard:folder-edit' subfolder.pk %}" class="text-primary me-2" title="ویرایش">
+              <i class="fe fe-edit"></i>
+            </a>
+            <a href="{% url 'dashboard:folder-delete' subfolder.pk %}" class="text-danger" title="حذف">
+              <i class="fe fe-trash-2"></i>
+            </a>
+          </div>
+            <i class="fe fe-folder fe-32 text-warning"></i>
+            <h5 class="card-title mt-2">
+              <a href="{% url 'dashboard:folder-detail' subfolder.pk %}">{{ subfolder.name }}</a>
+            </h5>
+            <p class="text-muted small">زیرپوشه</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+    {% for file in folder.files.all %}
+      <div class="col-6 col-md-3 mb-4">
+        <div class="card text-center shadow-sm">
+          <div class="card-body">
+            <i class="fe fe-file fe-32 text-info"></i>
+            <h5 class="card-title mt-2">
+              <a href={{file.file.url}} target="_blank">{{ file.name }} . <small>{{ file.file|file_extension }}</small></a>
+            </h5>
+            <p class="text-muted small">{{ file.mime_type }}</p>
+          </div>
+          <div class="position-absolute top-0 end-0 m-2">
+            <a href="{% url 'dashboard:file-edit' file.pk %}" class="text-primary me-2" title="ویرایش">
+              <i class="fe fe-edit"></i>
+            </a>
+            <a href="{% url 'dashboard:file-delete' file.pk %}" class="text-danger" title="حذف" onclick="return confirm('آیا مطمئن هستید؟');">
+              <i class="fe fe-trash-2"></i>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if not folder.subfolders.exists and not folder.files.exists %}
+    <div class="alert alert-info text-center mt-4">
+      هیچ فایل یا پوشه‌ای در این مسیر وجود ندارد.
+    </div>
+  {% endif %}
+</div>
+{% endblock content %}

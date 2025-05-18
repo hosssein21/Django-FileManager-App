@@ -1,0 +1,9 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+<h3>حذف پوشه</h3>
+<p>آیا مطمئن هستید که می‌خواهید "{{ object.name }}" را حذف کنید؟</p>
+<form method="post">{% csrf_token %}
+  <button type="submit" class="btn btn-danger">بله، حذف شود</button>
+  <a href="{% url 'dashboard:folder-detail' object.pk %}" class="btn btn-secondary">لغو</a>
+</form>
+{% endblock %}
