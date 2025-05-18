@@ -15,7 +15,7 @@
 
         {% if user.is_authenticated %}
             <p class="lead">Hi {{ user.username }}! You're already logged in.</p>
-            <a href="#" class="btn btn-success mt-3">Go to Dashboard</a>
+            <a href="{% url 'dashboard:home' %}" class="btn btn-success mt-3">Go to Dashboard</a>
             <a href="{% url 'account:logout' %}" class="btn btn-danger mt-3">Logout</a>
         {% else %}
             <p class="lead">Please log in to access your dashboard.</p>

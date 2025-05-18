@@ -6,7 +6,7 @@
 {% block content %}
 <div class="col-12">
   <div class="w-50 mx-auto text-center justify-content-center py-5 my-5">
-    <h2 class="page-title mb-0">به پنل مدیرتی ادمین سایت خوش آمدید</h2>
+    <h2 class="page-title mb-0">به سیستم مدیریت فایل ترنا خوش آمدید</h2>
     <p class="lead  mb-4 mt-2">با این سیستم به راحتی میتوانید داده ها و فایل های خود را مدیریت کنید</p>
   </div>
   <div class="row my-4">
@@ -47,8 +47,8 @@
       <div class="card shadow">
         <div class="card-body">
           <i class="fe fe-book fe-32 text-danger"></i>
-          <a href="">
-            <h3 class="h5 mt-4 mb-1">پیام ها</h3>
+          <a href="{% url 'dashboard:folder-list' %}">
+            <h3 class="h5 mt-4 mb-1">فایل ها و پوشه ها</h3>
           </a>
           <p class="">دسترسی به لیست پیام های ارسال شده</p>
         </div> <!-- .card-body -->

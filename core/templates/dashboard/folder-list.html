@@ -8,6 +8,8 @@
   <div class="text-center mb-4">
     <h2 class="page-title">مدیریت پوشه‌ها</h2>
     <p class="lead">در این بخش می‌توانید پوشه‌های خود را مشاهده و مدیریت کنید</p>
+          <a href="{% url 'dashboard:add-root-folder' %}" class="btn btn-primary">📁 ایجاد پوشه جدید</a>
+          <a href="{% url 'dashboard:add-root-file' %}" class="btn btn-primary">📤 بارگذاری فایل جدید</a>
   </div>
 
   <div class="row">
@@ -34,5 +36,6 @@
       </div>
     {% endfor %}
   </div>
+  
 </div>
 {% endblock content %}

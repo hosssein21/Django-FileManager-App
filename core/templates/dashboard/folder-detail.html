@@ -68,5 +68,10 @@
       هیچ فایل یا پوشه‌ای در این مسیر وجود ندارد.
     </div>
   {% endif %}
+
+  <a href="{% url 'dashboard:add-subfolder' folder.id %}" class="btn btn-primary">📁 افزودن پوشه فرزند</a>
+  <a href="{% url 'dashboard:add-file' folder.id %}" class="btn btn-success">📄 افزودن فایل جدید</a>
 </div>
+
+
 {% endblock content %}
