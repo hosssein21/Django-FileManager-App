@@ -97,5 +97,5 @@ class DashboardFileCreateView(LoginRequiredMixin, CreateView):
 
 
     def get_success_url(self):
-        return reverse_lazy('dashboard:folder-detail', kwargs={'pk': self.object.folder.id})
+        return reverse_lazy('dashboard:folder-detail', kwargs={'pk': self.object.pk})
     

@@ -24,6 +24,7 @@ class FileForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'file': forms.FileInput(attrs={'class': 'form-control'}),
+            
         }
 
     def __init__(self, *args, **kwargs):
@@ -36,11 +37,11 @@ class FileForm(forms.ModelForm):
         uploaded_file = self.cleaned_data.get('file')
         if uploaded_file:
             file_size = uploaded_file.size
-            min_size = 10 * 1024 * 1024  # 10MB in bytes
+            min_size = 1 * 1024  # 10MB in bytes
             max_size = 50 * 1024 * 1024  # 50MB in bytes
 
             if file_size < min_size:
-                raise forms.ValidationError("حجم فایل نباید کمتر از ۱۰ مگابایت باشد.")
+                raise forms.ValidationError("حجم فایل نباید کمتر از ۱ مگابایت باشد.")
             if file_size > max_size:
                 raise forms.ValidationError("حجم فایل نباید بیشتر از ۵۰ مگابایت باشد.")
 
